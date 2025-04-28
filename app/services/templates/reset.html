@@ -2,22 +2,70 @@
 <html lang="en">
 
 <head>
-    <title>OTP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Your Password</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;500&display=swap');
+    </style>
 </head>
 
-<body>
-    <h1 style="background-color: blue; color: white;">
-        eeek!
-    </h1>
-    <p> The reset link:</p>
-    <br>
-    {% if environment == "production" %}
-    <p>https:eeek-auth.onrender.com/forgot-password/reset/{{ pin }}/?token={{ data }}</p>
-    {% else %}
-    <p>http://localhost:5173/forgot-password/reset/{{ pin }}/?token={{ data }}</p>
-    {% endif %}
-    <br>
-    <p>will expire in 15 minutes.</p>
+<body
+    style="margin: 0; padding: 0; background-color: #f3f6f9; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+        <tr>
+            <td align="center" style="padding: 40px 20px;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                    style="max-width: 480px; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(29, 41, 61, 0.05);">
+                    <!-- Header -->
+                    <tr>
+                        <td align="center" style="padding: 32px 40px 24px; background-color: #1d293d;">
+                            <h1
+                                style="margin: 0; color: #1ab273; font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.02em;">
+                                eeek!</h1>
+                        </td>
+                    </tr>
+                    <!-- Content -->
+                    <tr>
+                        <td style="padding: 40px;">
+                            <h2
+                                style="margin: 0 0 16px; color: #1d293d; font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700;">
+                                Reset your password</h2>
+                            <p style="margin: 0 0 32px; color: #4b5563; font-size: 16px; line-height: 1.6;">We received
+                                a request to reset your password. Click the button below to choose a new one. This link
+                                will expire in 15 minutes.</p>
+
+                            <!-- Action Button -->
+                            <div style="text-align: center;">
+                                {% if environment == "production" %}
+                                <a href="https:eeek-auth.onrender.com/forgot-password/reset/{{ pin }}/?token={{ data }}"
+                                    style="display: inline-block; background-color: #1ab273; color: #ffffff; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; text-decoration: none; padding: 14px 32px; border-radius: 8px; box-shadow: 0 4px 12px rgba(26, 178, 115, 0.2);">Reset
+                                    Password</a>
+                                {% else %}
+                                <a href="http://localhost:5173/forgot-password/reset/{{ pin }}/?token={{ data }}"
+                                    style="display: inline-block; background-color: #1ab273; color: #ffffff; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; text-decoration: none; padding: 14px 32px; border-radius: 8px; box-shadow: 0 4px 12px rgba(26, 178, 115, 0.2);">Reset
+                                    Password</a>
+                                {% endif %}
+                            </div>
+
+                            <p style="margin: 32px 0 0; color: #6b7280; font-size: 14px; text-align: center;">
+                                If you didn't request this, you can safely ignore this email.
+                            </p>
+                        </td>
+                    </tr>
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding: 0 40px 32px; text-align: center;">
+                            <div style="height: 1px; background-color: #e5e7eb; margin-bottom: 24px;"></div>
+                            <p style="margin: 0; color: #9ca3af; font-size: 12px;">
+                                &copy; 2026 eeek-auth. All rights reserved.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 
 </html>

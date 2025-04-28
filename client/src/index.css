@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  PP Neue Machina Inktrap self-host placeholder.
+  When you have the font files licensed, uncomment and replace the path:
+
+  @font-face {
+    font-family: "Neue Machina";
+    src: url("/fonts/PPNeueMachina-InktrapRegular.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Neue Machina";
+    src: url("/fonts/PPNeueMachina-InktrapUltrabold.woff2") format("woff2");
+    font-weight: 800;
+    font-display: swap;
+  }
+  Then set --font-heading: "Neue Machina", "Space Grotesk", sans-serif; in :root
+*/
+
+@layer base {
+  :root {
+    /* ── Emerald Green primary ── */
+    --primary: 155 75% 38%;
+    --primary-foreground: 0 0% 100%;
+
+    /* ── Deep slate secondary ── */
+    --secondary: 222 28% 16%;
+    --secondary-foreground: 210 20% 88%;
+
+    /* ── Light mode surfaces ── */
+    --background: 210 22% 96%;
+    --foreground: 222 25% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 25% 12%;
+
+    --muted: 214 18% 88%;
+    --muted-foreground: 220 12% 46%;
+
+    --accent: 155 75% 38%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 214 18% 82%;
+    --input: 214 18% 82%;
+    --ring: 155 75% 38%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --primary: 155 75% 50%;
+    --primary-foreground: 222 28% 8%;
+
+    --secondary: 222 22% 14%;
+    --secondary-foreground: 210 20% 88%;
+
+    --background: 222 28% 8%;
+    --foreground: 210 20% 92%;
+
+    --card: 222 26% 11%;
+    --card-foreground: 210 20% 92%;
+
+    --muted: 222 22% 18%;
+    --muted-foreground: 215 15% 58%;
+
+    --accent: 155 75% 50%;
+    --accent-foreground: 222 28% 8%;
+
+    --border: 222 20% 22%;
+    --input: 222 20% 22%;
+    --ring: 155 75% 50%;
+
+    --destructive: 0 62% 52%;
+    --destructive-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+
+  *,
+  *::before,
+  *::after {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Satoshi", "Inter", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Primary glow helper */
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.35),
+      0 0 60px hsl(var(--primary) / 0.12);
+  }
+
+  /* Glowing left border for expertise cards */
+  .border-glow-left {
+    border-left: 3px solid hsl(var(--primary));
+    box-shadow: -4px 0 16px hsl(var(--primary) / 0.25);
+  }
+
+  /* Glassmorphism panel */
+  .glass {
+    background: hsl(var(--card) / 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+}

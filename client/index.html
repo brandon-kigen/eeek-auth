@@ -1,17 +1,24 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title >EEEK!</title>
+  <meta name="description" content="eeek! — Responsible e-waste recycling. Certified collection, data destruction and material recovery for electronics." />
+  <title>eeek! — E-Waste Recycling</title>
 </head>
-
 <body>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script>
+    // Apply dark mode before render to prevent flash
+    (function() {
+      var t = localStorage.getItem('eeek-theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
-
 </html>

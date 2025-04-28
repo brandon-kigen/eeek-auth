@@ -1,4 +1,4 @@
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, Request
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from typing import Annotated, Any, Callable
@@ -8,9 +8,20 @@ import jwt
 import models
 from database import get_db
 from utils.hash_utils import validate_passwd
+from utils.jwt_utils import validate_session_token
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login', auto_error=False)
+
+
+def get_token_from_cookie(request: Request):
+    token = request.cookies.get("access_token")
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authenticated",
+        )
+    return token
 
 
 def validate_user(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
@@ -54,7 +65,7 @@ def validate_sso_user(user_credentials: dict[str, Any], db: Session = Depends(ge
                             detail="Please contact support. Details: Server Error")
 
 
-def get_current_user(token: Annotated[str, Depends(oauth2_scheme)] | str, validator: Callable[[str], Any], db: Session = Depends(get_db)):
+def get_current_user(token: Annotated[str, Depends(get_token_from_cookie)], db: Session = Depends(get_db)):
     credentials_exception = HTTPException(
         status.HTTP_401_UNAUTHORIZED,
         detail="Invalid Credentials.",
@@ -62,7 +73,7 @@ def get_current_user(token: Annotated[str, Depends(oauth2_scheme)] | str, valida
     )
 
     try:
-        payload = validator(token)
+        payload = validate_session_token(token)
         user_id = payload.get('sub')
 
         if user_id is None:
