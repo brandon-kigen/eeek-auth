@@ -31,9 +31,8 @@ def login(response: Response, user_credentials: OAuth2PasswordRequestForm = Depe
             key='access_token',
             value=token,
             httponly=True,
-            secure=True,
-            samesite='strict',
-            domain='localhost',
+            secure=True,  # Set to False if testing on pure HTTP
+            samesite='lax',
             max_age=86400
         )
 
@@ -65,8 +64,7 @@ def sso_login(response: Response, payload: schemas.PayloadSchema, provider: str,
             value=token,
             httponly=True,
             secure=True,
-            samesite='strict',
-            domain='localhost',
+            samesite='lax',
             max_age=86400
         )
 

@@ -14,11 +14,13 @@ const instance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 export async function userSignUp(user: NewUserType) {
   try {
     const response = await instance.post("/signup/", user);
+    return response;
   } catch (errorStack: any) {
     console.error(errorStack.response);
     return errorStack.response;

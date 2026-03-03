@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef } from "react";
 import { userSSOSignUp, userSSOLogIn } from "../modules/submitNewUser";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const GoogleSignIn = ({ setSignedUp, setLoggedIn }: any) => {
   const buttonRef = useRef(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadGoogleScript = () => {
@@ -53,15 +53,15 @@ const GoogleSignIn = ({ setSignedUp, setLoggedIn }: any) => {
       ? await userSSOLogIn(data.credential, "google")
       : await userSSOSignUp(data.credential, "google");
     if (response === 201) {
-      setSignedUp(true);
+      setSignedUp?.(true);
       setTimeout(() => {
-        navigate("/home")
+        navigate("/home");
       }, 2000);
     } else if (response === 200) {
-        setLoggedIn(true)
-        setTimeout(() => {
-          navigate('/home')
-        }, 2000);
+      setLoggedIn?.(true);
+      setTimeout(() => {
+        navigate("/home");
+      }, 2000);
     }
   };
 

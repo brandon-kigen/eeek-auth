@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { userSSOSignUp } from "../modules/submitNewUser";
-import ln from '../assets/LI-In-Bug.png'
+import ln from "../assets/LI-In-Bug.png";
 
-const LinkedInSignIn = ({ setSignedUp }: any) => {
+const LinkedInSignIn = ({ setSignedUp, setLoggedIn }: any) => {
   const linkedInLogin = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${
     import.meta.env.VITE_LINKEDIN_CLIENT_ID
   }&redirect_uri=${encodeURIComponent(
-    import.meta.env.VITE_LINKEDIN_REDIRECT_URI
+    import.meta.env.VITE_LINKEDIN_REDIRECT_URI,
   )}&scope=profile%20email%20openid`;
 
   const handleLinkedInCallback = async () => {
@@ -18,7 +18,9 @@ const LinkedInSignIn = ({ setSignedUp }: any) => {
     if (code) {
       let response = await userSSOSignUp(code, provider);
       if (response === 201) {
-        setSignedUp(true);
+        setSignedUp?.(true);
+      } else if (response === 200) {
+        setLoggedIn?.(true);
       }
     }
   };
@@ -29,8 +31,13 @@ const LinkedInSignIn = ({ setSignedUp }: any) => {
 
   return (
     <>
-      <a href={linkedInLogin}>
-        <img src={ln} height={40} alt="Continue with LinkedIn" title="Continue with LinkedIn" />
+      <a href={linkedInLogin} className="block">
+        <img
+          src={ln}
+          className="h-10 w-10 object-contain"
+          alt="Continue with LinkedIn"
+          title="Continue with LinkedIn"
+        />
       </a>
     </>
   );
